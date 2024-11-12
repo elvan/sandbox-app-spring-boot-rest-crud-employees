@@ -2,8 +2,8 @@ package com.github.elvan.restcrudemployees.rest;
 
 import java.util.List;
 
-import com.github.elvan.restcrudemployees.dao.EmployeeDAO;
 import com.github.elvan.restcrudemployees.entity.Employee;
+import com.github.elvan.restcrudemployees.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class EmployeeRestController {
 
-  private EmployeeDAO employeeDAO;
+  private EmployeeService employeeService;
 
   // quick and dirty: inject employee dao (use constructor injection)
-  public EmployeeRestController(EmployeeDAO theEmployeeDAO) {
-    employeeDAO = theEmployeeDAO;
+  public EmployeeRestController(EmployeeService theEmployeeService) {
+    employeeService = theEmployeeService;
   }
 
   // expose "/employees" and return a list of employees
   @GetMapping("/employees")
   public List<Employee> findAll() {
-    return employeeDAO.findAll();
+    return employeeService.findAll();
   }
 
 }
